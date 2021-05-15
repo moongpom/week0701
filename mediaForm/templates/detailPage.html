@@ -1,0 +1,17 @@
+{%extends 'base2.html'%}
+
+{%block content%}
+
+    <hr>
+    {% if bookContents.image %}
+    <p><img src={{bookContents.image.url}} alt=""></p>
+    {% endif %}
+    {{bookContents.title}}<br>
+    {{bookContents.writer}}<br>
+    {{bookContents.publisher}}<br>
+    {{bookContents.body}}<br>
+    {{bookContents.new_date}}<br>
+
+    <a href="{% url 'editBook' bookContents.id%}">수정하기</a>
+    <a href="{% url 'deleteBook' bookContents.id%}">삭제하기</a>
+    {%endblock%}

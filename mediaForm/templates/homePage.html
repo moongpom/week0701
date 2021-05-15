@@ -1,0 +1,18 @@
+{%extends 'base2.html'%}
+
+{%block content%}
+
+    <h1>책 목록</h1>
+    <hr color="green" >
+    <div class="bookList">
+        {% for unit in bookContents %}
+            <div class="bookList"></div>
+            <img class="bookimage"src={{unit.image.url}} alt="" width ="200px">
+                제목  {{unit.title}}<br>
+                작가  {{unit.writer}}<br>
+                  {{unit.summary}}<br>
+                <a href="{% url 'detailBook' unit.id%}">더보기</a><br>
+        {% endfor %}
+    </div>
+
+{%endblock%}

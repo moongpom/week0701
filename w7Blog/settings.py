@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pomBlog.apps.PomblogConfig',
+    'mediaForm.apps.MediaformConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,8 +120,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+#import os해주기
+#STATICFILES_DIRS를 통해 스태틱파일을 모아주기 전에 현재 static파일들이 어디 있는지 경로 써줌
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'pomBlog','static'),
+    os.path.join(BASE_DIR,'mediaForm','static')]
+#static파일을 어디에 모을건지
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+#이용자가 업로드한 파일을 어디에 모을건지
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#이용자가 업로드한 파일을 모으는 곳
+MEDIA_URL='/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
