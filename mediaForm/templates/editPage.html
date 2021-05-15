@@ -1,15 +1,18 @@
-{%extends 'base2.html'%}
+{% extends 'base2.html' %}
 
-{%block content%}
+{% block content %}
 
-<form action="{% url 'updateBook' bookContents.id%}" method="post">
+<form method="post" enctype="multipart/form-data">
     {%csrf_token%}
-    <p>제목 <input type="text" name="title" value="{{bookContents.title}}"></p>
-    <p>작가 <input type="text" name="writer" value="{{bookContents.writer}}"></p>
-    <p>출판사 <input type="text" name="publisher" value="{{bookContents.publisher}}"></p>
-    <p>개정일 <input type="text" name="pub_date" value="{{bookContents.pub_date}}"></p>
-    책 설명<textarea name="body" cols="30" rows="10">{{bookContents.body}}</textarea>
+    <table>
+        {{edit_post.as_table}}
+    </table>
     <button type="submit">올리기</button>
 </form>
 
 {%endblock%}
+
+
+
+
+

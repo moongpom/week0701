@@ -12,32 +12,31 @@ def detailPage(request,bookId):
     return render(request,"detailPage.html",{'bookContents':books})
 
 def newPage(request):
-    form = BookForm()
-    return render(request,'newPage.html',{'form':form})
-
-def create(request):
-    form = BookForm(request.POST,request.FILES)
-    if form.is_valid():
-        new_book = form.save(commit=False)
-        new_book.new_date=timezone.now()
-        new_book.save()
-        return redirect("detailBook",new_book.id)
-    return redirect('homePage') #﻿유효성 검사 실패 했을 땐 home으로 redirect할 수 있도록
+    if request.method == 'POST': #글 작성 후 저장버튼 눌렀을 때
+        book_form = BookForm(request.POST,request.FILES)
+        if book_form.is_valid():
+            book = book_form.save(commit = False)
+            book.new_date = timezone.now() # 날짜 생성
+            book.save()
+            return redirect('homePage') 
+    else:
+        book_form = BookForm()
+        return render(request,'newPage.html',{'form':book_form})
 
 def edit(request,bookId):
-    editBook=Book.objects.get(id=bookId)
-    return render(request,'editPage.html',{'bookContents':editBook})
+    book = get_object_or_404(Book,pk=bookId)
+    if request.method == 'GET': #수정
+        book_form=BookForm(instance=book)
+        return render(request,'editPage.html',{'edit_post':book_form})
+    else:
+        book_form = BookForm(request.POST,request.FILES,instance = book)
+        if book_form.is_valid():
+            book = book_form.save(commit = False)
+            book.new_date = timezone.now() # 날짜 생성
+            book.save()
+        return redirect("/mediaForm/"+str(bookId)) 
 
-def update(request,bookId):
-    updateBook=Book.objects.get(id=bookId)
-    updateBook.title=request.POST['title']
-    updateBook.writer=request.POST['writer']
-    updateBook.body=request.POST['body']
-    updateBook.publisher=request.POST['publisher']
-    updateBook.pub_date=request.POST['pub_date']
-    updateBook.new_date=timezone.now()
-    updateBook.save()
-    return redirect("detailBook",updateBook.id)
+    
 
 def delete(request,bookId):
     deleteBook=Book.objects.get(id=bookId)
