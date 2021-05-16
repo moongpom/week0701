@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,30 +10,88 @@
     <style>
        a{
           text-decoration: none;
-          color: green;
+          color: rgb(101, 37, 161);
         }
         a:hover{
           color: green;
         }
-        .gobook{
-          text-align: right;
-          font-size: 20px;
-        } 
+        
         .header{
           margin: auto;
           width: 1000px;
           font-weight: 900;
-          font-size: 40px;
+          font-size: 50px;
+        }
+        body{
+          background-image: url("{%static 'pomface.png'%}");
+          margin: auto;
+          width: 1000px;
+          font-weight: 900;
+          font-size: 20px;
+          color : rgb(101, 37, 161);
+        }
+        .menu{
+          position: relative;
+          left: 75%;
+          top : -60px;
+          font-size: 20px;
+        } 
+        table{
+          margin: auto;
+          text-align: center;
+
+        }
+        input,textarea {
+          width: 500px;
+          border-style: double;
+        }
+        form{
+          border-radius: 20px;
+          background-color: white;
+          opacity:0.7;
+          width: 600px;
+          height: 600px;
+          margin: auto;
+          margin-top: 7%;
+          text-align: center;
+          font-weight: 900;
+        }
+        .detailTable, .detailTable tr,.detailTable td{
+          border: 2px dashed rgb(101, 37, 161);
+          width: 500px;
+        }
+       
+        .detailTable  th{
+          width: 100px;
+        }
+         .homeTable tr,.homeTable td{
+          text-align: center;
+          color:saddlebrown;
+          width: 600px;
+          border-collapse: collapse;
+          border-radius: 30px;
+          border-style: hidden;
+          box-shadow: 0 0 0 1px #000;
+
+
+        }
+
+        .homeTable tr{
+          background-color: white;
+          opacity: 0.7;
+          } 
+        .homeTable .blank{
+          height: 20px;
         }
     </style>
 
   </head>
 
 <body>
-  {% load static %}
+
   <div class="header"> 
     <a class="logo" href="{% url 'home'%}"><img src="{%static 'pomface.png'%}" alt="pompom" width="50">POMPOM</a>
-    <p><a class="gobook" href="{% url 'homePage'%}">책보러가기</a></p>
+    
   </div>       
 
     <div class="container">

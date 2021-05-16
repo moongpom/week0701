@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.utils import timezone
 from .models import Book
 from .forms import BookForm
+
 # Create your views here.
 def homePage(request):
     books=Book.objects.all()
